@@ -3,8 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 import json
 import pandas as pd
-import subprocess
-subprocess.run(['pip', 'install', '-r', 'requirements.txt'])
+
 
 
 @st.cache
