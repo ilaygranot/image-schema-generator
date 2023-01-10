@@ -4,8 +4,6 @@ from bs4 import BeautifulSoup
 import json
 import pandas as pd
 
-
-
 @st.cache
 def convert_df(df):
     return df.to_csv().encode('utf-8')
