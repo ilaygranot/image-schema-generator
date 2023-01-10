@@ -12,13 +12,13 @@ def convert_df(df):
 st.title('Image Schema Generator')
 
 # Use an expander to explain the app
-st.expander("See explanation")
-    st.write("""
+with st.expander("See explanation"):
+	st.write("""
         This app generates image schema that follows schema.org guidelines. 
         The schema can be used to provide search engines with information about images on a webpage. 
         For more information, please visit the following link: https://schema.org/ImageObject. 
         To generate a schema, upload a CSV file with a "url" column (in lowercase) containing the URLs of the webpages you wish to scrape for images.
-    """)
+""")
 
 # Use Streamlit's file_uploader widget to allow the user to select and upload a file
 uploaded_file = st.file_uploader("Select a CSV file containing URLs", type="csv")
