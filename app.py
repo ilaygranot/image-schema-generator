@@ -12,7 +12,7 @@ def convert_df(df):
 st.title('Image Schema Generator')
 
 # Use an expander to explain the app
-st.expander("See explanation"):
+st.expander("See explanation")
     st.write("""
         This app generates image schema that follows schema.org guidelines. 
         The schema can be used to provide search engines with information about images on a webpage. 
