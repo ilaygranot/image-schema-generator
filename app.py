@@ -34,8 +34,13 @@ if st.button('Generate Image Schema'):
 
         # Iterate over the URLs
         for URL in urls:
+            # Specify a mobile User-Agent
+            headers = {
+                "User-Agent": "Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Mobile Safari/537.36 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
+            }
+
             # Send an HTTP GET request to the URL and retrieve the HTML content
-            response = requests.get(URL)
+            response = requests.get(URL, headers=headers)
             html = response.text
 
             # Parse the HTML content using Beautiful Soup
