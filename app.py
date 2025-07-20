@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 import json
 import pandas as pd
 
-@st.cache
+@st.cache_data
 def convert_df(df):
     return df.to_csv().encode('utf-8')
 
@@ -54,12 +54,23 @@ if st.button('Generate Image Schema'):
 
             # Iterate over the images
             for image in images:
+                src_url = image.get('src')
+                
+                # Skip images with "blur_" in the filename/URL
+                if src_url and "blur_" in src_url:
+                    continue
+                
+                # Get alt text and clean it by removing "Writer: " prefix
+                alt_text = image.get('alt')
+                if alt_text and alt_text.startswith('Writer: '):
+                    alt_text = alt_text.replace('Writer: ', '', 1)
+                
                 # Build the image schema using JSON-LD and schema.org guidelines
                 image_schema = {
                     "@type":"ImageObject",
-                    "name": image.get('alt'),  # Extract the alt text as the name
-                    "description": image.get('alt'),  # Extract the alt text as the description
-                    "contentUrl": image.get('src'),  # Use the get method to safely retrieve the src
+                    "name": alt_text,  # Extract the cleaned alt text as the name
+                    "description": alt_text,  # Extract the cleaned alt text as the description
+                    "contentUrl": src_url,  # Use the get method to safely retrieve the src
                 }
                 # Only add the height and width fields if they are present
                 height = image.get('height')
