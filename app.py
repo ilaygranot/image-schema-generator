@@ -56,8 +56,8 @@ if st.button('Generate Image Schema'):
             for image in images:
                 src_url = image.get('src')
                 
-                # Skip images with "blur_" in the filename/URL
-                if src_url and "blur_" in src_url:
+                # Skip images with "blur_" in the filename/URL or Google User Content URLs
+                if src_url and ("blur_" in src_url or "lh3.googleusercontent.com" in src_url):
                     continue
                 
                 # Get alt text and clean it by removing "Writer: " prefix
