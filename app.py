@@ -46,8 +46,14 @@ if st.button('Generate Image Schema'):
             # Parse the HTML content using Beautiful Soup
             soup = BeautifulSoup(html, 'html.parser')
 
-            # Extract the image objects from the HTML
-            images = soup.find_all('img')
+            # Find the specific content wrapper div using CSS selector equivalent to XPath
+            content_section = soup.select_one('#content-wrapper > div > div:nth-child(3) > div:first-child > div > div > article > div > section')
+            
+            # Extract the image objects only from within that specific section
+            if content_section:
+                images = content_section.find_all('img')
+            else:
+                images = []  # No images if the section is not found
 
             # Initialize a list to store the image schema objects
             image_schemas = []
